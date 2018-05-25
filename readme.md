@@ -1,6 +1,6 @@
 # gulp-axe-cli [![Build Status](https://travis-ci.org/samueleishion/gulp-axe-cli.svg?branch=master)](https://travis-ci.org/samueleishion/gulp-axe-cli)
 
-> My perfect gulp plugin
+Gulp plugin to test static pages with aXe as pre-commit hook or in CI environment.
 
 
 ## Install
