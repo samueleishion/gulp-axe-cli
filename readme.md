@@ -1,4 +1,4 @@
-# gulp-axe-cli [![Build Status](https://travis-ci.org/samueleishion/gulp-axe-cli.svg?branch=master)](https://travis-ci.org/samueleishion/gulp-axe-cli)
+# gulp-axe-cli [![Build Status](https://travis-ci.org/samueleishion/gulp-axe-cli.svg?branch=master)](https://travis-ci.org/samueleishion/gulp-axe-cli)[![Version](https://img.shields.io/npm/v/gulp-axe-cli.svg)](https://www.npmjs.com/package/gulp-axe-cli)[![License](https://img.shields.io/npm/l/gulp-axe-cli.svg)](LICENSE)
 
 Gulp plugin to test static pages with aXe as pre-commit hook or in CI environment.
 
