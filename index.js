@@ -30,6 +30,22 @@ function parseScope (scope) {
   return result
 }
 
+function parseTimeout (timeout) {
+  return (timeout === null || timeout <= 0) ? '' : ' --timeout=' + timeout
+}
+
+function parseLoadDelay (loadDelay) {
+  return (loadDelay === null || loadDelay <= 0) ? '' : ' --loadDelay=' + loadDelay
+}
+
+function parseBrowser (browser) {
+  return (browser === null || browser.length <= 0) ? '' : ' --browser ' + browser
+}
+
+function parseSave (save) {
+  return save ? ' --dir ./axe-results' : ''
+}
+
 module.exports = options => {
   options = options || {}
 
@@ -71,6 +87,10 @@ module.exports = options => {
         query += parseRules(params.rules)
         query += parseDisables(params.disable)
         query += parseScope(params.scope)
+        query += parseTimeout(params.timeout)
+        query += parseLoadDelay(params['load-delay'])
+        query += parseBrowser(params.browser)
+        query += parseSave(params.save)
 
         exec(query, function (error, response, body) {
           if (error !== null || response.indexOf('Accessibility issues detected') > 0) {
