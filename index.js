@@ -7,6 +7,29 @@ const exec = require('child_process').exec
 
 const PLUGIN_NAME = 'gulp-axe-cli'
 
+function parseTags (tags) {
+  return (tags === null || tags.length <= 0) ? '' : ' --tags ' + tags.join(',')
+}
+
+function parseRules (rules) {
+  return (rules === null || rules.length <= 0) ? '' : ' --rules ' + rules.join(',')
+}
+
+function parseDisables (disables) {
+  return (disables === null || disables.length <= 0) ? '' : ' --disable ' + disables.join(',')
+}
+
+function parseScope (scope) {
+  var result = ''
+
+  if (scope !== null && Object.keys(scope).length > 0) {
+    result += (scope.include === null || scope.include.length <= 0) ? '' : " --include '" + scope.include + "'"
+    result += (scope.exclude === null || scope.exclude.length <= 0) ? '' : " --exclude '" + scope.exclude + "'"
+  }
+
+  return result
+}
+
 module.exports = options => {
   options = options || {}
 
@@ -31,6 +54,7 @@ module.exports = options => {
         // var contents = Buffer.from(buffer.contents.toString())
         var params = options
         var url
+        var query
 
         if (typeof params.urls === 'function') {
           url = params.urls(buffer.history[0])
@@ -42,7 +66,13 @@ module.exports = options => {
           url = buffer.history[0]
         }
 
-        exec('axe "' + url + '" --tags wcag2a,wcag2aa', function (error, response, body) {
+        query = 'axe "' + url + '"'
+        query += parseTags(params.tags)
+        query += parseRules(params.rules)
+        query += parseDisables(params.disable)
+        query += parseScope(params.scope)
+
+        exec(query, function (error, response, body) {
           if (error !== null || response.indexOf('Accessibility issues detected') > 0) {
             gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
             throw response
