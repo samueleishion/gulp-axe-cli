@@ -1,0 +1,8 @@
+{
+  "generator-gulp-plugin-boilerplate": {
+    "promptValues": {
+      "githubUsername": "samueleishion",
+      "website": "http://samuelacuna.com"
+    }
+  }
+}
