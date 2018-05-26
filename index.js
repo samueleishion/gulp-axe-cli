@@ -91,9 +91,13 @@ module.exports = options => {
         query += parseLoadDelay(params['load-delay'])
         query += parseBrowser(params.browser)
         query += parseSave(params.save)
+        query += ' --timer'
 
         exec(query, function (error, response, body) {
-          if (error !== null || response.indexOf('Accessibility issues detected') > 0) {
+          if (error !== null) {
+            gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
+            throw error
+          } else if (response.indexOf('Accessibility issues detected') > 0) {
             gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
             throw response
           } else if (error !== null || response.indexOf('0 violations found!') > 0) {
