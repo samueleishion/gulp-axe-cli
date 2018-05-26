@@ -7,39 +7,67 @@ const exec = require('child_process').exec
 
 const PLUGIN_NAME = 'gulp-axe-cli'
 
+function validateObject (object) {
+  return object !== undefined &&
+    object !== null &&
+    typeof object === 'object' &&
+    Object.keys(object).length > 0
+}
+
+function validateArray (array) {
+  return array !== undefined &&
+    array !== null &&
+    typeof array === 'object' &&
+    array.length > 0
+}
+
+function validateString (string) {
+  return string !== undefined &&
+    string !== null &&
+    typeof string === 'string' &&
+    string.length > 0
+}
+
+function validateNumber (number) {
+  return number !== undefined &&
+    number !== null &&
+    typeof number === 'number' &&
+    number >= 0
+}
+
 function parseTags (tags) {
-  return (tags === null || tags.length <= 0) ? '' : ' --tags ' + tags.join(',')
+  return validateArray(tags) ? ' --tags ' + tags.join(',') : ''
 }
 
 function parseRules (rules) {
-  return (rules === null || rules.length <= 0) ? '' : ' --rules ' + rules.join(',')
+  return validateArray(rules) ? ' --rules ' + rules.join(',') : ''
 }
 
 function parseDisables (disables) {
-  return (disables === null || disables.length <= 0) ? '' : ' --disable ' + disables.join(',')
+  return validateArray(disables) ? ' --disable ' + disables.join(',') : ''
 }
 
 function parseScope (scope) {
   var result = ''
 
-  if (scope !== null && Object.keys(scope).length > 0) {
-    result += (scope.include === null || scope.include.length <= 0) ? '' : " --include '" + scope.include + "'"
-    result += (scope.exclude === null || scope.exclude.length <= 0) ? '' : " --exclude '" + scope.exclude + "'"
+  if (validateObject(scope)) {
+    result += (validateString(scope.include)) ? " --include '" + scope.include + "'" : ''
+    result += (validateString(scope.exclude)) ? " --exclude '" + scope.exclude + "'" : ''
   }
 
   return result
 }
 
 function parseTimeout (timeout) {
-  return (timeout === null || timeout <= 0) ? '' : ' --timeout=' + timeout
+  return (validateNumber(timeout)) ? ' --timeout=' + timeout : ''
 }
 
 function parseLoadDelay (loadDelay) {
-  return (loadDelay === null || loadDelay <= 0) ? '' : ' --loadDelay=' + loadDelay
+  return (validateNumber(loadDelay)) ? ' --loadDelay=' + loadDelay : ''
 }
 
 function parseBrowser (browser) {
-  return (browser === null || browser.length <= 0) ? '' : ' --browser ' + browser
+  return (validateString(browser)) ? ' --browser ' + browser : ''
 }
 
 function parseSave (save) {
@@ -67,10 +95,9 @@ module.exports = options => {
     try {
       (() => {
         var buffer = file
-        // var contents = Buffer.from(buffer.contents.toString())
         var params = options
         var url
-        var query
+        var command
 
         if (typeof params.urls === 'function') {
           url = params.urls(buffer.history[0])
@@ -82,18 +109,18 @@ module.exports = options => {
           url = buffer.history[0]
         }
 
-        query = 'axe "' + url + '"'
-        query += parseTags(params.tags)
-        query += parseRules(params.rules)
-        query += parseDisables(params.disable)
-        query += parseScope(params.scope)
-        query += parseTimeout(params.timeout)
-        query += parseLoadDelay(params['load-delay'])
-        query += parseBrowser(params.browser)
-        query += parseSave(params.save)
-        query += ' --timer'
+        command = 'axe "' + url + '"'
+        command += parseTags(params.tags)
+        command += parseRules(params.rules)
+        command += parseDisables(params.disable)
+        command += parseScope(params.scope)
+        command += parseTimeout(params.timeout)
+        command += parseLoadDelay(params['load-delay'])
+        command += parseBrowser(params.browser)
+        command += parseSave(params.save)
+        command += ' --timer'
 
-        exec(query, function (error, response, body) {
+        exec(command, function (error, response, body) {
           if (error !== null) {
             gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
             throw error
