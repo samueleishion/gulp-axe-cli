@@ -24,6 +24,8 @@ gulp.task('default', () =>
 );
 ```
 
+__Note__ While aXe one of the best automated tools, it only covers 20%-50% of all a11y issues. Be sure to test manually after the aXe test.
+
 
 ## API
 
@@ -124,6 +126,54 @@ Type: `boolean`<br>
 Default: `false`
 
 gulp-axe-cli is meant to run and pass/fail on the terminal, but this doesn't mean you can't save the reports. By default, the reports will save as json files with all the errors in `./axe-results/`
+# gulp-axe-cli-demo
+Demo project for [gulp-axe-cli](https://github.com/samueleishion/gulp-axe-cli).
+
+## Install
+
+```
+$ git clone https://github.com/samueleishion/gulp-axe-cli-demo
+$ npm install
+```
+
+## Running
+
+To run the demo site, run the static express app:
+
+```
+$ npm run serve
+```
+
+To run the tests with aXe, run this script:
+
+```
+$ npm run test
+```
+
+__Note__ that the server must be running in order to run the aXe tests. See more below under gotchas.
+
+__Note__ While aXe one of the best automated tools, it only covers 20%-50% of all a11y issues. Be sure to test manually after the smoke test.
+
+## Gotchas
+
+### Create ./axe-results on install to save
+
+If you want to save the results, by default, we're saving them into an `./axe-results` directory. This directory should already be present by the time you run the tests, so you can add a script to [add it post install](https://github.com/samueleishion/gulp-axe-cli-demo/blob/master/package.json#L7).
+
+### Test coverage
+
+aXe helps to automate a11y testing, but it only covers certain rules for fully accessible sites. Here's the note from aXe after each test run: 
+```
+Please note that only 20% to 50% of all accessibility issues can automatically be detected. 
+Manual testing is always required. For more information see:
+https://dequeuniversity.com/curriculum/courses/testingmethods
+```
+
+There are only certain a11y rules that are covered, so for maximum coverage, do test your application manually.
+
+## Demo
+
+We're created a demo site to test the integration at [https://github.com/samueleishion/gulp-axe-cli-demo](https://github.com/samueleishion/gulp-axe-cli-demo)
 
 ## License
 
