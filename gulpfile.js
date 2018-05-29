@@ -5,7 +5,9 @@ var ava = require('gulp-ava');
 var express = require('gulp-express');
 
 gulp.task('test', function() {
-  express.run(['test/server.js'], {}, false);
+  express.run(['test/server.js'], {
+    shell: true
+  }, false);
 
   gulp.src('test/cases.js')
     .pipe(ava({
