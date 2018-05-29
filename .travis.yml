@@ -3,6 +3,7 @@ node_js:
   - '8'
   - '6'
   - '4'
+sudo: required
 addons:
   chrome: stable # have Travis install chrome stable.
 before_install:
