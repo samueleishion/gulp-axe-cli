@@ -110,18 +110,18 @@ module.exports = options => {
           url = buffer.history[0]
         }
 
-        args = [url];
-        args = args.concat(parseTags(params.tags));
-        args = args.concat(parseRules(params.rules));
-        args = args.concat(parseDisables(params.disable));
-        args = args.concat(parseScope(params.scope));
-        args = args.concat(parseTimeout(params.timeout));
-        args = args.concat(parseLoadDelay(params['load-delay']));
-        args = args.concat(parseBrowser(params.browser));
-        args = args.concat(parseSave(params.save));
-        args = args.concat('--timer');
+        args = [url]
+        args = args.concat(parseTags(params.tags))
+        args = args.concat(parseRules(params.rules))
+        args = args.concat(parseDisables(params.disable))
+        args = args.concat(parseScope(params.scope))
+        args = args.concat(parseTimeout(params.timeout))
+        args = args.concat(parseLoadDelay(params['load-delay']))
+        args = args.concat(parseBrowser(params.browser))
+        args = args.concat(parseSave(params.save))
+        args = args.concat('--timer')
 
-        command = spawn('axe', args, { shell: true });
+        command = spawn('axe', args, { shell: true })
 
         if (command.status === 1) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
