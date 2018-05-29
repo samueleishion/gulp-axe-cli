@@ -3,7 +3,7 @@
 const through = require('through2')
 const PluginError = require('plugin-error')
 const gutil = require('gulp-util')
-const exec = require('child_process').exec
+const spawn = require('child_process').spawnSync
 
 const PLUGIN_NAME = 'gulp-axe-cli'
 
@@ -98,6 +98,7 @@ module.exports = options => {
         var params = options
         var url
         var command
+        var args
 
         if (typeof params.urls === 'function') {
           url = params.urls(buffer.history[0])
@@ -109,28 +110,28 @@ module.exports = options => {
           url = buffer.history[0]
         }
 
-        command = 'axe "' + url + '"'
-        command += parseTags(params.tags)
-        command += parseRules(params.rules)
-        command += parseDisables(params.disable)
-        command += parseScope(params.scope)
-        command += parseTimeout(params.timeout)
-        command += parseLoadDelay(params['load-delay'])
-        command += parseBrowser(params.browser)
-        command += parseSave(params.save)
-        command += ' --timer'
+        args = [url];
+        args = args.concat(parseTags(params.tags));
+        args = args.concat(parseRules(params.rules));
+        args = args.concat(parseDisables(params.disable));
+        args = args.concat(parseScope(params.scope));
+        args = args.concat(parseTimeout(params.timeout));
+        args = args.concat(parseLoadDelay(params['load-delay']));
+        args = args.concat(parseBrowser(params.browser));
+        args = args.concat(parseSave(params.save));
+        args = args.concat('--timer');
 
-        exec(command, function (error, response, body) {
-          if (error !== null) {
-            gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
-            throw error
-          } else if (response.indexOf('Accessibility issues detected') > 0) {
-            gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
-            throw response
-          } else if (error !== null || response.indexOf('0 violations found!') > 0) {
-            gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.green('[PASS]'), url)
-          }
-        })
+        command = spawn('axe', args, { shell: true });
+
+        if (command.status === 1) {
+          gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
+          throw command.error.toString()
+        } else if (command.output.toString().indexOf('Accessibility issues detected') > 0) {
+          gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
+          throw command.output.toString()
+        } else if (command.output.toString().indexOf('0 violations found!') > 0) {
+          gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.green('[PASS]'), url)
+        }
       })()
 
       this.push(file)
