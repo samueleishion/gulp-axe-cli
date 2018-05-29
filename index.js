@@ -36,7 +36,7 @@ function validateNumber (number) {
 }
 
 function parseTags (tags) {
-  return validateArray(tags) ? ' --tags ' + tags.join(',') : ''
+  return validateArray(tags) ? ' --tags ' + tags.join(',') : ' --tags wcag2a,wcag2aa'
 }
 
 function parseRules (rules) {
