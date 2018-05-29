@@ -1,8 +1,12 @@
-# gulp-axe-cli 
+# gulp-axe-cli
 
 [![Build Status](https://travis-ci.org/samueleishion/gulp-axe-cli.svg?branch=master)](https://travis-ci.org/samueleishion/gulp-axe-cli) [![Version](https://img.shields.io/npm/v/gulp-axe-cli.svg)](https://www.npmjs.com/package/gulp-axe-cli) [![License](https://img.shields.io/npm/l/gulp-axe-cli.svg)](LICENSE)
 
 Gulp plugin to test static pages with aXe as pre-commit hook or in CI environment.
+
+## Why gulp-axe-cli?
+
+Other axe-based plugins are build to generate reports. While these reports are great for analysis, these CLIs, plugins, and packages do not always work well with development pipelines. With gulp-axe-cli, we leverage the power of gulp as a task runner :muscle: and the automation for a11y testing of aXe :collision: to prevent bad code from being committed or build. :thumbsup:
 
 ## Install
 
@@ -52,8 +56,8 @@ const axeConfig = {
 			'exclude': ' ... '
 		},
 		browser: ' ... ',
-		timeout: 120, 
-		'load-delay': 2000, 
+		timeout: 120,
+		'load-delay': 2000,
 		save: false
 	};
 
@@ -162,9 +166,9 @@ If you want to save the results, by default, we're saving them into an `./axe-re
 
 ### Test coverage
 
-aXe helps to automate a11y testing, but it only covers certain rules for fully accessible sites. Here's the note from aXe after each test run: 
+aXe helps to automate a11y testing, but it only covers certain rules for fully accessible sites. Here's the note from aXe after each test run:
 ```
-Please note that only 20% to 50% of all accessibility issues can automatically be detected. 
+Please note that only 20% to 50% of all accessibility issues can automatically be detected.
 Manual testing is always required. For more information see:
 https://dequeuniversity.com/curriculum/courses/testingmethods
 ```
@@ -173,7 +177,7 @@ There are only certain a11y rules that are covered, so for maximum coverage, do 
 
 ## Demo
 
-We're created a demo site to test the integration at [https://github.com/samueleishion/gulp-axe-cli-demo](https://github.com/samueleishion/gulp-axe-cli-demo)
+We're created a demo repo to test the integration at [https://github.com/samueleishion/gulp-axe-cli-demo](https://github.com/samueleishion/gulp-axe-cli-demo)
 
 ## License
 
