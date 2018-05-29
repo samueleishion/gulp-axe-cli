@@ -125,10 +125,10 @@ module.exports = options => {
 
         if (command.status === 1) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
-          throw command.error.toString()
+          throw (command && command.error) ? command.error.toString() : 'Issue while running aXe cli'
         } else if (command.output.toString().indexOf('Accessibility issues detected') > 0) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
-          throw command.output.toString()
+          throw (command && command.output) ? command.output.toString() : 'Error testing ' + url
         } else if (command.output.toString().indexOf('0 violations found!') > 0) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.green('[PASS]'), url)
         }
