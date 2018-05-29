@@ -123,9 +123,18 @@ module.exports = options => {
 
         command = spawn('axe', args, { shell: true })
 
+        gutil.log(gutil.colors.yellow(url));
+        gutil.log(gutil.colors.yellow(command));
+        gutil.log(gutil.colors.yellow(Object.keys(command)));
+        gutil.log(gutil.colors.yellow("status", command.status));
+        gutil.log(gutil.colors.yellow("signal", command.signal));
+        gutil.log(gutil.colors.yellow("stdout", command.stdout));
+        gutil.log(gutil.colors.yellow("stderr", command.stderr));
+        gutil.log(gutil.colors.yellow("output", command.output));
+
         if (command.status === 1) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
-          throw (command && command.error) ? command.error.toString() : 'Issue while running aXe cli'
+          throw (command && command.output) ? command.output.toString() : 'Issue while running aXe cli'
         } else if (command.output.toString().indexOf('Accessibility issues detected') > 0) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
           throw (command && command.output) ? command.output.toString() : 'Error testing ' + url
