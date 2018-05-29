@@ -36,42 +36,42 @@ function validateNumber (number) {
 }
 
 function parseTags (tags) {
-  return validateArray(tags) ? ' --tags ' + tags.join(',') : ' --tags wcag2a,wcag2aa'
+  return validateArray(tags) ? ['--tags', tags.join(',')] : ['--tags','wcag2a,wcag2aa']
 }
 
 function parseRules (rules) {
-  return validateArray(rules) ? ' --rules ' + rules.join(',') : ''
+  return validateArray(rules) ? ['--rules', rules.join(',')] : []
 }
 
 function parseDisables (disables) {
-  return validateArray(disables) ? ' --disable ' + disables.join(',') : ''
+  return validateArray(disables) ? ['--disable', disables.join(',')] : []
 }
 
 function parseScope (scope) {
   var result = ''
 
   if (validateObject(scope)) {
-    result += (validateString(scope.include)) ? " --include '" + scope.include + "'" : ''
-    result += (validateString(scope.exclude)) ? " --exclude '" + scope.exclude + "'" : ''
+    result += (validateString(scope.include)) ? ["--include", "'" + scope.include + "'"] : []
+    result += (validateString(scope.exclude)) ? ["--exclude", "'" + scope.exclude + "'"] : []
   }
 
   return result
 }
 
 function parseTimeout (timeout) {
-  return (validateNumber(timeout)) ? ' --timeout=' + timeout : ''
+  return (validateNumber(timeout)) ? ['--timeout=' + timeout] : []
 }
 
 function parseLoadDelay (loadDelay) {
-  return (validateNumber(loadDelay)) ? ' --loadDelay=' + loadDelay : ''
+  return (validateNumber(loadDelay)) ? ['--loadDelay=' + loadDelay] : []
 }
 
 function parseBrowser (browser) {
-  return (validateString(browser)) ? ' --browser ' + browser : ''
+  return (validateString(browser)) ? ['--browser', browser] : []
 }
 
 function parseSave (save) {
-  return save ? ' --dir ./axe-results' : ''
+  return save ? ['--dir', './axe-results'] : []
 }
 
 module.exports = options => {
@@ -125,10 +125,10 @@ module.exports = options => {
 
         if (command.status === 1) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
-          throw command.error.toString()
+          throw (command && command.output) ? command.output.toString() : 'Issue while running aXe cli'
         } else if (command.output.toString().indexOf('Accessibility issues detected') > 0) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
-          throw command.output.toString()
+          throw (command && command.output) ? command.output.toString() : 'Error testing ' + url
         } else if (command.output.toString().indexOf('0 violations found!') > 0) {
           gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.green('[PASS]'), url)
         }

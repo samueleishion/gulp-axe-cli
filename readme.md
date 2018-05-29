@@ -6,7 +6,7 @@ Gulp plugin to test static pages with aXe as pre-commit hook or in CI environmen
 
 ## Why gulp-axe-cli?
 
-Other axe-based plugins are build to generate reports. While these reports are great for analysis, these CLIs, plugins, and packages do not always work well with development pipelines. With gulp-axe-cli, we leverage the power of gulp as a task runner :muscle: and the automation for a11y testing of aXe :collision: to prevent bad code from being committed or build. :thumbsup:
+Other axe-based plugins are built to generate reports. While these reports are great for analysis, these CLIs, plugins, and packages do not always work well with development pipelines. With gulp-axe-cli, we leverage the power of gulp as a task runner :muscle: and the automation for a11y testing of aXe :collision: to prevent bad code from being committed or build. :thumbsup:
 
 ## Install
 

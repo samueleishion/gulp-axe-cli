@@ -6,7 +6,7 @@ import fn from '../'
 test.beforeEach(t => {
   t.context = {
     urls: function (file) {
-      file = 'http://localhost:3000/' + file.substring(file.lastIndexOf('/') + 1)
+      file = 'http://localhost:3297/' + file.substring(file.lastIndexOf('/') + 1)
       return file
     },
     'tags': ['wcag2a', 'wcag2aa'],
