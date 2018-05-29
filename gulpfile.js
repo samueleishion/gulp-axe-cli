@@ -21,6 +21,7 @@ gulp.task('test', function() {
     .pipe(gulp.dest('test'))
     .on('end', function() {
       express.stop();
+      process.exit(0);
     });
 });
 
