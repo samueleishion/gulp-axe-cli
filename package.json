@@ -29,7 +29,21 @@
     "index.js"
   ],
   "keywords": [
-    "gulpplugin"
+    "gulpplugin",
+    "gulp",
+    "plugin",
+    "axe",
+    "a11y",
+    "accessibility",
+    "testing",
+    "automation",
+    "semantic",
+    "html",
+    "wcag",
+    "wcag2a",
+    "wcag2aa",
+    "wai",
+    "aria"
   ],
   "dependencies": {
     "axe-cli": "3.0.0",
