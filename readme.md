@@ -131,9 +131,6 @@ Default: `false`
 
 gulp-axe-cli is meant to run and pass/fail on the terminal, but this doesn't mean you can't save the reports. By default, the reports will save as json files with all the errors in `./axe-results/`
 
-## gulp-axe-cli-demo
-Demo project to illustrate integration: [gulp-axe-cli-demo](https://github.com/samueleishion/gulp-axe-cli-demo).
-
 ## Gotchas
 
 ### Create ./axe-results on install to save
