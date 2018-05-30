@@ -6,7 +6,7 @@ Gulp plugin to test static pages with aXe as pre-commit hook or in CI environmen
 
 ## Why gulp-axe-cli?
 
-Other axe-based plugins are built to generate reports. While these reports are great for analysis, these CLIs, plugins, and packages do not always work well with development pipelines. With gulp-axe-cli, we leverage the power of gulp as a task runner :muscle: and the automation for a11y testing of aXe :collision: to prevent bad code from being committed or build. :thumbsup:
+Other axe-based plugins are built to generate reports. While these reports are great for analysis, these CLIs, plugins, and packages do not always work well with development pipelines. With gulp-axe-cli, we leverage the power of gulp as a task runner :muscle: and the automation for a11y testing of aXe :collision: to prevent bad code from being committed or built. :thumbsup:
 
 ## Install
 
@@ -130,33 +130,9 @@ Type: `boolean`<br>
 Default: `false`
 
 gulp-axe-cli is meant to run and pass/fail on the terminal, but this doesn't mean you can't save the reports. By default, the reports will save as json files with all the errors in `./axe-results/`
-# gulp-axe-cli-demo
-Demo project for [gulp-axe-cli](https://github.com/samueleishion/gulp-axe-cli).
 
-## Install
-
-```
-$ git clone https://github.com/samueleishion/gulp-axe-cli-demo
-$ npm install
-```
-
-## Running
-
-To run the demo site, run the static express app:
-
-```
-$ npm run serve
-```
-
-To run the tests with aXe, run this script:
-
-```
-$ npm run test
-```
-
-__Note__ that the server must be running in order to run the aXe tests. See more below under gotchas.
-
-__Note__ While aXe one of the best automated tools, it only covers 20%-50% of all a11y issues. Be sure to test manually after the smoke test.
+## gulp-axe-cli-demo
+Demo project to illustrate integration: [gulp-axe-cli-demo](https://github.com/samueleishion/gulp-axe-cli-demo).
 
 ## Gotchas
 
