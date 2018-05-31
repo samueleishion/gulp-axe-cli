@@ -53,12 +53,12 @@ function parseScope (scope) {
   if (validateObject(scope)) {
     if (validateString(scope.include)) {
       result.push("--include")
-      result.push(scope.include)
+      result.push(scope.include.replace('#','\\#'))
     }
 
     if (validateString(scope.exclude)) {
       result.push("--exclude")
-      result.push(scope.exclude)
+      result.push(scope.exclude.replace('#','\\#'))
     }
   }
 

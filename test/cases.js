@@ -46,3 +46,15 @@ test.failing('Failing errors.html', async t => {
 
   t.fail()
 })
+
+test.failing('Failing goodheader-badbody.html', async t => {
+  const stream = fn(t.context)
+
+  stream.end(new Vinyl({
+    base: __dirname,
+    path: path.join(__dirname, 'pages/goodheader-badbody.html'),
+    contents: Buffer.from('unicorns')
+  }))
+
+  t.fail()
+})
