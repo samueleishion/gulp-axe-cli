@@ -48,11 +48,18 @@ function parseDisables (disables) {
 }
 
 function parseScope (scope) {
-  var result = ''
+  var result = []
 
   if (validateObject(scope)) {
-    result += (validateString(scope.include)) ? ["--include", "'" + scope.include + "'"] : []
-    result += (validateString(scope.exclude)) ? ["--exclude", "'" + scope.exclude + "'"] : []
+    if (validateString(scope.include)) {
+      result.push("--include")
+      result.push(scope.include.replace('#','\\#'))
+    }
+
+    if (validateString(scope.exclude)) {
+      result.push("--exclude")
+      result.push(scope.exclude.replace('#','\\#'))
+    }
   }
 
   return result
