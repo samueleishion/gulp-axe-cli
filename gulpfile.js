@@ -2,12 +2,11 @@
 
 var gulp = require('gulp');
 var ava = require('gulp-ava');
-var express = require('gulp-express');
+var gls = require('gulp-live-server');
 
 var test = async function() {
-  express.run(['test/server.js'], {
-    shell: true
-  }, false);
+  var server = gls.static('test/pages', 3297);
+  server.start();
 
   gulp.src('test/cases.js')
     .pipe(ava({
@@ -15,12 +14,12 @@ var test = async function() {
     }))
     .on('error', function(err) {
       console.log(err.message);
-      express.stop();
+      server.stop();
       process.exit(1);
     })
     .pipe(gulp.dest('test'))
     .on('end', function() {
-      express.stop();
+      server.stop();
       process.exit(0);
     });
 };
