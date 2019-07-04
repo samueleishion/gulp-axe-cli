@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var ava = require('gulp-ava');
 var express = require('gulp-express');
 
-var test = function() {
+var test = async function() {
   express.run(['test/server.js'], {
     shell: true
   }, false);
