@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var ava = require('gulp-ava');
 var express = require('gulp-express');
 
-gulp.task('test', function() {
+var test = async function() {
   express.run(['test/server.js'], {
     shell: true
   }, false);
@@ -23,6 +23,8 @@ gulp.task('test', function() {
       express.stop();
       process.exit(0);
     });
-});
+};
 
-gulp.task('default', ['test']);
+gulp.task('test', gulp.series(test));
+
+gulp.task('default', gulp.series('test'));
