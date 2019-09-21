@@ -9,17 +9,17 @@ test.beforeEach(t => {
       file = 'http://localhost:3297/' + file.substring(file.lastIndexOf('/') + 1)
       return file
     },
-    'tags': ['wcag2a', 'wcag2aa'],
-    'rules': ['color-contrast'],
-    'disable': ['html-has-lang'],
-    'scope': {
-      'include': '#main',
-      'exclude': '#brand'
+    tags: ['wcag2a', 'wcag2aa'],
+    rules: ['color-contrast'],
+    disable: ['html-has-lang'],
+    scope: {
+      include: '#main',
+      exclude: '#brand'
     },
-    'browser': '',
-    'timeout': 120,
+    browser: '',
+    timeout: 120,
     'load-delay': 2000,
-    'save': false
+    save: false
   }
 })
 
