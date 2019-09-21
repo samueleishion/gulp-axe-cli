@@ -155,3 +155,8 @@ We're created a demo repo to test the integration at [https://github.com/samuele
 ## License
 
 MIT © [Sam Acuna](http://samuelacuna.com)
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/samueleishion/gulp-axe-cli/badge.svg?style=beer-square)](https://beerpay.io/samueleishion/gulp-axe-cli)  [![Beerpay](https://beerpay.io/samueleishion/gulp-axe-cli/make-wish.svg?style=flat-square)](https://beerpay.io/samueleishion/gulp-axe-cli?focus=wish)
