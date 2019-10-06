@@ -1,9 +1,13 @@
-import path from 'path'
+// import path from 'path'
 import test from 'ava'
-import Vinyl from 'vinyl'
-import fn from '../'
+// import Vinyl from 'vinyl'
+// import fn from '../'
+import colors from 'ansi-colors'
+
+const count = 0
 
 test.beforeEach(t => {
+  // console.log(colors.magenta('cases.js'), 'before')
   t.context = {
     urls: function (file) {
       file = 'http://localhost:3297/' + file.substring(file.lastIndexOf('/') + 1)
@@ -23,38 +27,24 @@ test.beforeEach(t => {
   }
 })
 
-test('Passing index.html', async t => {
-  const stream = fn(t.context)
+// test.afterEach(t => {
+//   console.log(colors.magenta('cases.js'), 'after')
+// })
 
-  stream.end(new Vinyl({
-    base: __dirname,
-    path: path.join(__dirname, 'pages/index.html'),
-    contents: Buffer.from('unicorns')
-  }))
-
-  t.pass()
+test('Passing index.html', t => {
+  console.log(colors.magenta('cases.js'), 'start:passing')
+  t.is(count, 0)
+  return t.pass()
+  // console.log(colors.magenta('cases.js'), 'end:passing')
 })
 
-test.failing('Failing errors.html', async t => {
-  const stream = fn(t.context)
-
-  stream.end(new Vinyl({
-    base: __dirname,
-    path: path.join(__dirname, 'pages/errors.html'),
-    contents: Buffer.from('unicorns')
-  }))
-
-  t.fail()
+test.failing('Failing errors.html', t => {
+  // console.log(colors.magenta('cases.js'), 'start:failing')
+  t.is(count, 1)
+  return t.fail()
+  // console.log(colors.magenta('cases.js'), 'end:failing')
 })
 
-test.failing('Failing goodheader-badbody.html', async t => {
-  const stream = fn(t.context)
-
-  stream.end(new Vinyl({
-    base: __dirname,
-    path: path.join(__dirname, 'pages/goodheader-badbody.html'),
-    contents: Buffer.from('unicorns')
-  }))
-
+test.failing('Failing goodheader-badbody.html', t => {
   t.fail()
 })

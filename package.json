@@ -51,17 +51,17 @@
     "through2": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^8.1.0",
-    "ava": "^2.3.0",
+    "@babel/core": "^7.6.2",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "ava": "^2.4.0",
     "gulp": "^4.0.0",
     "gulp-ava": "^2.0.0",
     "gulp-live-server": "0.0.31",
-    "husky": "^3.0.5",
+    "husky": "^3.0.8",
     "npm-run-all": "^4.1.3",
     "p-event": "^4.1.0",
-    "standard": "^14.1.0",
+    "standard": "^14.3.1",
     "vinyl": "^2.1.0"
   },
   "standard": {
