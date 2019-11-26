@@ -1,12 +1,9 @@
 language: node_js
 node_js:
-  - '8'
-  - '6'
+  - '10'
+  - '12'
 sudo: required
 addons:
   chrome: stable # have Travis install chrome stable.
 before_install:
   - "export CHROME_BIN=chromium-browser"
-cache:
-  directories:
-    - node_modules

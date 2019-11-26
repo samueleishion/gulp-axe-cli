@@ -11,12 +11,10 @@
     "url": "samuelacuna.com"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
   },
   "scripts": {
-    "precommitmsg": "npm run lint",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "prepush": "npm-run-all test",
     "lint": "standard ./**/*.js --fix",
     "test": "npm-run-all lint \"gulp test\"",
     "axe": "axe",
@@ -47,22 +45,23 @@
   ],
   "dependencies": {
     "ansi-colors": "^4.1.1",
-    "axe-cli": "^3.0.0",
+    "axe-cli": "^3.2.0",
     "fancy-log": "^1.3.3",
-    "plugin-error": "^0.1.2",
-    "through2": "^2.0.0"
+    "plugin-error": "^1.0.1",
+    "through2": "^3.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^6.2.0",
-    "@commitlint/config-conventional": "^6.1.3",
-    "ava": "^2.1.0",
+    "@babel/core": "^7.6.2",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "ava": "^2.4.0",
     "gulp": "^4.0.0",
-    "gulp-ava": "^1.0.0",
+    "gulp-ava": "^2.0.0",
     "gulp-live-server": "0.0.31",
-    "husky": "^0.14.3",
+    "husky": "^3.0.8",
     "npm-run-all": "^4.1.3",
-    "p-event": "^1.3.0",
-    "standard": "^11.0.1",
+    "p-event": "^4.1.0",
+    "standard": "^14.3.1",
     "vinyl": "^2.1.0"
   },
   "standard": {
@@ -70,5 +69,12 @@
       "node_modules",
       ".git"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "npm run lint",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-push": "npm-run-all test"
+    }
   }
 }
