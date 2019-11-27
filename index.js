@@ -2,7 +2,8 @@
 
 const through = require('through2')
 const PluginError = require('plugin-error')
-const gutil = require('gulp-util')
+const log = require('fancy-log')
+const colors = require('ansi-colors')
 const spawn = require('child_process').spawnSync
 
 const PLUGIN_NAME = 'gulp-axe-cli'
@@ -77,6 +78,12 @@ function parseBrowser (browser) {
   return (validateString(browser)) ? ['--browser', browser] : []
 }
 
+function parseCromedriverPath(path) {
+  return (validateString(path)) ?
+    ['--chromedriver-path', path] :
+    ['--chromedriver-path', './node_modules/chromedriver/bin/chromedriver']
+}
+
 function parseSave (save) {
   return save ? ['--dir', './axe-results'] : []
 }
@@ -125,19 +132,20 @@ module.exports = options => {
         args = args.concat(parseTimeout(params.timeout))
         args = args.concat(parseLoadDelay(params['load-delay']))
         args = args.concat(parseBrowser(params.browser))
+        args = args.concat(parseCromedriverPath(params['cromedriver-path']))
         args = args.concat(parseSave(params.save))
         args = args.concat('--timer')
 
         command = spawn('axe', args, { shell: true })
 
         if (command.status === 1) {
-          gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Issue while running aXe cli')
+          log(colors.cyan(PLUGIN_NAME), colors.red('[ERROR]'), 'Issue while running aXe cli')
           throw (command && command.output) ? command.output.toString() : 'Issue while running aXe cli'
         } else if (command.output.toString().indexOf('Accessibility issues detected') > 0) {
-          gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.red('[ERROR]'), 'Error testing ' + url)
+          log(colors.cyan(PLUGIN_NAME), colors.red('[ERROR]'), 'Error testing ' + url)
           throw (command && command.output) ? command.output.toString() : 'Error testing ' + url
         } else if (command.output.toString().indexOf('0 violations found!') > 0) {
-          gutil.log(gutil.colors.cyan(PLUGIN_NAME), gutil.colors.green('[PASS]'), url)
+          log(colors.cyan(PLUGIN_NAME), colors.green('[PASS]'), url)
         }
       })()
 
