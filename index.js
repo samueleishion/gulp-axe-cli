@@ -90,10 +90,8 @@ function parseSave (save) {
 
 module.exports = options => {
   options = options || {}
-  console.log(colors.yellow('index.js'), 'start');
 
   return through.obj(function (file, enc, cb) {
-    console.log(colors.yellow('index.js'), 'through');
     if (file.isNull()) {
       cb(null, file)
       return
@@ -109,7 +107,6 @@ module.exports = options => {
     }
 
     try {
-      console.log(colors.yellow('index.js'), 'try');
       (() => {
         var buffer = file
         var params = options
@@ -154,11 +151,9 @@ module.exports = options => {
 
       this.push(file)
     } catch (err) {
-      console.log(colors.yellow('index.js'), 'catch');
       this.emit('error', new PluginError(PLUGIN_NAME, err))
     }
 
-    console.log(colors.yellow('index.js'), 'cb', Object.keys(file.toString()));
     cb(null, file)
   })
 }
