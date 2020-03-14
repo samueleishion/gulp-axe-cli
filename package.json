@@ -17,6 +17,7 @@
   "scripts": {
     "lint": "standard ./**/*.js --fix",
     "test": "npm-run-all lint \"gulp test\"",
+    "preversion": "npm-run-all test",
     "axe": "axe",
     "gulp": "gulp",
     "node": "node",
