@@ -1,6 +1,6 @@
 {
   "name": "gulp-axe-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gulp plugin to test static pages with aXe as pre-commit hook or in CI environment.",
   "main": "index.js",
   "license": "MIT",
